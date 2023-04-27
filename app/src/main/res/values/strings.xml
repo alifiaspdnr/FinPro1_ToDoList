@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FinPro1_ToDoList</string>
+    <string name="txt_img_1">When you\'re overwhelmed by the \namount of work you have on your \nplate, stop, and rethink.</string>
+    <string name="txt_header">Manage your task\nwith us.</string>
+</resources>
