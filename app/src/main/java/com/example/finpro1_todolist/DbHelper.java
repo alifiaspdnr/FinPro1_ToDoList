@@ -3,14 +3,12 @@ package com.example.finpro1_todolist;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.util.Log;
 
 import java.util.ArrayList;
+
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "TaskActivity";
@@ -45,10 +43,33 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
     public void delTask (String task) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DB_TABLE, DB_COLUMN + " = ? ", new String[] {task});
         db.close();
+    }
+
+
+//    public void update(String task){
+////        SQLiteDatabase db = this.getWritableDatabase();
+////        ContentValues values = new ContentValues();
+////        values.put(DB_COLUMN, task);
+////        Log.d("update", "nilai: " + values);
+////
+////        //int i = db.update(DB_TABLE, values, "ID = " + id, null);
+////        db.update(DB_TABLE,  values, DB_COLUMN + " = ? " , new String[] {task});
+////        //db.close();
+////        //return i;
+////    }
+
+    public void update(String task, String newTask){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_COLUMN, newTask);
+        Log.d("update", "nilai: " + values);
+
+        db.update(DB_TABLE, values, DB_COLUMN + " = ? ", new String[]{task});
     }
 
     public ArrayList<String> getTaskList() {

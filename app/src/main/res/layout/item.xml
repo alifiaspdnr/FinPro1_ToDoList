@@ -23,17 +23,33 @@
             android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btn_update"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/poppinsregular"
+            android:onClick="delTask"
+            android:padding="12dp"
+            android:text="Mark as completed"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginStart="3dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="3dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginBottom="3dp"
             android:fontFamily="@font/poppinsregular"
             android:padding="12dp"
-            android:text="Mark as completed"
+            android:text="Edit"
             android:textAllCaps="false"
-            android:onClick="delTask"
+            android:onClick="update"
             />
 
     </RelativeLayout>

@@ -1,10 +1,15 @@
 package com.example.finpro1_todolist;
 
+import static android.provider.SyncStateContract.Helpers.update;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -23,7 +28,7 @@ public class HalamanUtamaActivity extends AppCompatActivity implements View.OnCl
     DbHelper dbHelper;
     ArrayAdapter<String> mAdapter;
     ListView listTask;
-    Button button_add;
+    Button button_add, button_update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,6 @@ public class HalamanUtamaActivity extends AppCompatActivity implements View.OnCl
         listTask = findViewById(R.id.list);
         button_add = findViewById(R.id.btn_add);
         button_add.setOnClickListener(this);
-
         loadTaskList();
     }
 
@@ -52,8 +56,33 @@ public class HalamanUtamaActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    public void update (View view){
+        View parent = (View) view.getParent();
+        TextView taskTextView = (TextView) parent.findViewById(R.id.item_name);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Update Data");
+        final EditText inputField = new EditText(this);
+        builder.setView(inputField);
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                String task = String.valueOf(inputField.getText());
+//                dbHelper = new DbHelper(HalamanUtamaActivity.this);
+//                SQLiteDatabase db = dbHelper.getWritableDatabase();
+//                ContentValues values = new ContentValues();
 
+                // values.clear();
+                //dbHelper.update(task);
+                dbHelper.update(taskTextView.getText().toString(), task);
+                loadTaskList();
+            }
+        });
+
+        builder.setNegativeButton("Cancel",null);
+
+        builder.create().show();
+    }
 
     public void delTask (View view) {
         View parent = (View) view.getParent();
@@ -73,6 +102,8 @@ public class HalamanUtamaActivity extends AppCompatActivity implements View.OnCl
                 .setNegativeButton("No", null)
                 .show();
     }
+
+
 
 
     @Override
